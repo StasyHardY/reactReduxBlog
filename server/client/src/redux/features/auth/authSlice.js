@@ -1,5 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../../utils/axios";
+/* eslint-disable no-param-reassign */
+/* eslint-disable consistent-return */
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from '../../../utils/axios';
 
 const initialState = {
   user: null,
@@ -9,44 +11,44 @@ const initialState = {
 };
 
 export const registerUser = createAsyncThunk(
-  "auth/registerUser",
+  'auth/registerUser',
   async ({ username, password }) => {
     try {
-      const { data } = await axios.post("/auth/register", {
+      const { data } = await axios.post('/auth/register', {
         username,
         password,
       });
       if (data.token) {
-        window.localStorage.setItem("token", data.token);
+        window.localStorage.setItem('token', data.token);
       }
       return data;
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
 export const loginUser = createAsyncThunk(
-  "auth/loginUser",
+  'auth/loginUser',
   async ({ username, password }) => {
     try {
-      const { data } = await axios.post("/auth/login", {
+      const { data } = await axios.post('/auth/login', {
         username,
         password,
       });
       if (data.token) {
-        window.localStorage.setItem("token", data.token);
+        window.localStorage.setItem('token', data.token);
       }
       return data;
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
-export const getMe = createAsyncThunk("auth/loginUser", async () => {
+export const getMe = createAsyncThunk('auth/loginUser', async () => {
   try {
-    const { data } = await axios.get("/auth/me");
+    const { data } = await axios.get('/auth/me');
     return data;
   } catch (error) {
     console.log(error);
@@ -54,7 +56,7 @@ export const getMe = createAsyncThunk("auth/loginUser", async () => {
 });
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     logout: (state) => {

@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
+import path from 'path'
 
 const app = express()
 
@@ -29,8 +30,16 @@ async function start() {
    try {
       await mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.uau7dsg.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`)
       app.listen(PORT, () => console.log(`server start on port: ${PORT}`))
-   } catch (e) {
-      console.log(e)
+   } catch (error) {
+      console.log(error)
    }
+}
+
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 start()
