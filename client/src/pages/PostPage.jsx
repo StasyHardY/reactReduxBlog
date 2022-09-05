@@ -4,10 +4,11 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AiFillDelete, AiTwotoneEdit } from 'react-icons/ai';
 import Moment from 'react-moment';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { InfinitySpin } from 'react-loader-spinner';
 import { removePost } from '../redux/features/post/postSlice';
 import axios from '../utils/axios';
+import { Notification } from '../components/Notification';
 
 export function PostPage() {
   const [post, setPost] = useState(null);
@@ -27,8 +28,8 @@ export function PostPage() {
   const removeHandler = () => {
     try {
       dispatch(removePost(params.id));
-      toast('пост был удален');
-      navigate('/');
+        <Notification />;
+        navigate('/');
     } catch (error) {
       console.log(error);
     }

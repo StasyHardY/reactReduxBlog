@@ -6,6 +6,8 @@ import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
 import path from 'path'
 
+
+
 const app = express()
 
 dotenv.config()
@@ -19,6 +21,7 @@ const DB_NAME = process.env.DB_NAME
 // Middleware
 app.use(cors())
 app.use(express.json())
+
 
 
 // Routes
